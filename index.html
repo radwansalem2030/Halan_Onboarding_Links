@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>روابط المادة التدريبية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Cairo,sans-serif}
+body{
+background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+min-height:100vh;padding:25px;color:#fff
+}
+.container{max-width:1000px;margin:auto}
+.header{
+text-align:center;padding:35px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+border-radius:30px;margin-bottom:25px
+}
+.header h1{font-size:clamp(24px,4vw,42px)}
+.header p{color:#cbd5e1;margin-top:10px}
+
+.card{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.1);
+border-radius:24px;
+padding:22px;
+margin-bottom:18px;
+transition:.3s;
+}
+.card:hover{transform:translateY(-3px)}
+.title{font-size:22px;font-weight:800}
+.desc{color:#cbd5e1;margin-top:8px}
+
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.btn{
+padding:12px 18px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-weight:700;
+font-size:15px
+}
+.open{background:#2563eb;color:#fff}
+.copy{background:#10b981;color:#fff}
+
+.badge{
+display:inline-block;
+padding:6px 12px;
+background:rgba(255,255,255,.08);
+border-radius:50px;
+margin-top:10px;
+font-size:13px;
+color:#93c5fd
+}
+
+.toast{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#10b981;
+padding:12px 22px;
+border-radius:12px;
+display:none;
+font-weight:700;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>روابط المادة التدريبية</h1>
+<p>التدريب التمهيدي للأخصائيين الجدد</p>
+</div>
+
+<div id="cards"></div>
+
+</div>
+
+<div id="toast" class="toast">✅ تم نسخ الرابط</div>
+
+<script>
+const links=[
+["📚","المادة التدريبية","محتوى التدريب والمواد التعليمية","https://halaninc.sharepoint.com/:f:/s/DigitalTransformation/IgDWTk4QMsmbSpGLRixEf8nLAev9XyY8fMEc7Lp-gE2ZhqQ?e=qnzcDI"],
+["📊","شيت متابعة التعيينات الجديدة","متابعة حضور وتعيينات المتدربين","https://halaninc-my.sharepoint.com/:x:/g/personal/radwan_mohamed_halan_com/IQBR47tY1XDHQ5JWRHIJdo6SAVdFTnPnTKAYkSL2krQ1SJ0?e=SnmslB"],
+["📝","فورم تسجيل الجلسات","تسجيل حضور الجلسات التدريبية","https://forms.office.com/Pages/ResponsePage.aspx?id=01-Ga4qkH0-lsqhNwH1AY_se9DMAFFVPqmgTqGf73jNUNEpFMDBKWTI5UkZURTVINU9FUlYzR0FBOS4u"],
+["📸","فورم رفع صورة الإقرار","رفع الإقرار بعد التوقيع","https://forms.office.com/Pages/ResponsePage.aspx?id=01-Ga4qkH0-lsqhNwH1AY_se9DMAFFVPqmgTqGf73jNUQkJLVlFFMVJVNzFCODNDQ0ZDMlJFQTYzVi4u"],
+["⭐","فورم الاستبيان","تقييم التدريب وإرسال الملاحظات","https://forms.office.com/Pages/ResponsePage.aspx?id=01-Ga4qkH0-lsqhNwH1AY8gsqSDEqGNHpgphYf72EdBUQ01WMEo3Rk01NENKSFQ4RVMwOEYwSjM2VC4u"]
+];
+
+const cards=document.getElementById('cards');
+
+links.forEach((l,i)=>{
+cards.innerHTML+=`
+<div class="card">
+<div class="title">${l[0]} ${l[1]}</div>
+<div class="desc">${l[2]}</div>
+<div class="badge">رابط جاهز للفتح أو النسخ</div>
+<div class="actions">
+<button class="btn open" onclick="window.open('${l[3]}','_blank')">فتح الرابط</button>
+<button class="btn copy" onclick="copyLink('${l[3]}')">نسخ الرابط</button>
+</div>
+</div>`;
+});
+
+cards.innerHTML+=`
+<div class="card">
+<div class="title">🧠 فورم الاختبار بعد أسبوعين من التدريب</div>
+<div class="desc">سيتم إضافته قريباً</div>
+<div class="badge">Not Ready</div>
+</div>`;
+
+function copyLink(link){
+navigator.clipboard.writeText(link);
+const t=document.getElementById('toast');
+t.style.display='block';
+setTimeout(()=>t.style.display='none',2000);
+}
+</script>
+</body>
+</html>
